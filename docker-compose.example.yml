@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  dresmon:
+    build: .
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/hosts:/etc/hosts
+    environment:
+      - DRESMON_PROVIDER=traefik
+      - DRESMON_TLD=local
+      - DRESMON_EXCLUDE=
+      - DRESMON_TARGET_IP=127.0.0.1
+      - DRESMON_HOSTS_BLOCK_TAG=dresmon
+      - LOG_LEVEL=warn

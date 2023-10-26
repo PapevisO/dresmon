@@ -1,0 +1,32 @@
+# Git and version control
+.git/
+.gitignore
+
+# Build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+
+# IDEs and editors
+*.iml
+*.idea/
+*.vscode/
+*.swp
+*.swo
+*.swn
+
+# Virtual environment
+venv/
+*.venv
+
+# Custom environment variables
+.env
