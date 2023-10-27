@@ -1,0 +1,7 @@
+# start dresmon traefik managed block for local # This block is managed by Dresmon. Do not edit manually!
+127.0.0.1 hello1.local
+# end dresmon traefik managed block for local # This block is managed by Dresmon. Do not edit manually!
+
+# start dresmon traefik managed block for local # This block is managed by Dresmon. Do not edit manually!
+127.0.0.1 hello2.local
+# end dresmon traefik managed block for local # This block is managed by Dresmon. Do not edit manually!

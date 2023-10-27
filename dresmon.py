@@ -3,6 +3,7 @@ import importlib
 import pkgutil
 from providers import BaseProvider
 from config import logger, DRESMON_PROVIDER
+from hosts.manager import sync_hosts_file
 
 client = docker.from_env()
 
@@ -31,13 +32,14 @@ def process_container(container):
     domains = provider_instance.get_domains(container)
     if domains:
         logger.debug(f"Domains for container {container.name}: {', '.join(domains)}")
-    logger.warn(f"Not implemented: Update /etc/hosts")
-    # TODO: Update /etc/hosts with the domains
+        sync_hosts_file(domains)
+
+    logger.debug("No domains to update /etc/hosts")
 
 def process_existing_containers():
     logger.info("Processing existing containers...")
     for container in client.containers.list():
-        update_hosts(container)
+        process_container(container)
 
 def monitor_docker_events():
     logger.info("Starting to monitor Docker events...")
@@ -46,6 +48,7 @@ def monitor_docker_events():
         if event['Type'] == 'container' and event['Action'] == 'start':
             container = client.containers.get(event['id'])
             logger.debug(f"New container started: {container.name}")
+            process_container(container)
 
 ###
 # Start and listen for container events
