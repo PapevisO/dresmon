@@ -15,15 +15,12 @@ def sync_hosts_file(domains):
             update_existing_block(hosts_content, domains)
 
 def block_exists(hosts_content):
-    """
-    Check if the Dresmon block exists in the hosts file.
-    """
-    start_tag_exists = get_start_tag() in hosts_content
-    end_tag_exists = get_end_tag() in hosts_content
+    start_tag_exists = any(get_start_tag() in line for line in hosts_content)
+    end_tag_exists = any(get_end_tag() in line for line in hosts_content)
 
     if start_tag_exists and end_tag_exists:
-        start_index = hosts_content.index(get_start_tag())
-        end_index = hosts_content.index(get_end_tag())
+        start_index = next(i for i, line in enumerate(hosts_content) if get_start_tag() in line)
+        end_index = next(i for i, line in enumerate(hosts_content) if get_end_tag() in line)
         if start_index > end_index:
             raise ValueError("Invalid block: Start tag appears after end tag.")
         return True
