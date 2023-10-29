@@ -1,3 +1,6 @@
+from no_windows import terminate_if_windows_assumed
+terminate_if_windows_assumed()
+
 import docker
 import importlib
 import pkgutil
